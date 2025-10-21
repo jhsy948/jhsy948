@@ -1,0 +1,632 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* CSS 파일 */
+
+html{
+    /* HTML 스크롤을 완전히 차단하여 BODY만 스크롤러가 되게 함 */
+    height: 100%; 
+    overflow: hidden; /* ⭐ HTML 스크롤 차단 */
+    margin: 0;
+    padding: 0;
+}
+body{
+    min-height: 100%; 
+    position: relative; 
+    margin: 0;
+    padding: 0;
+    /* BODY의 가로 스크롤도 방지 (주로 BODY나 HTML에서 스크롤 주체를 잡기 때문) */
+    overflow-x: hidden; 
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='36' viewport='0 0 100 100' style='fill:black; font-size:20px; transform: rotate(-30deg);'><text y='50%'>💧</text></svg>") 16 -2, auto; 
+    background: #020202;
+}
+.port-wrap1{
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 64px;
+    box-sizing: border-box;
+}
+#bg-stars{
+    width: 100%; /* 뷰포트 width 대신 부모 BODY의 width를 따름 */
+    /* position: absolute;의 기준이 이제 BODY가 됨 */
+    position: absolute; 
+    top: 0;
+    left: 0;
+    z-index: 20;
+    pointer-events: none;
+    /* height는 JS에서 BODY의 실제 높이(scrollHeight)로 설정됨 */
+}
+a{ 
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='36' viewport='0 0 100 100' style='fill:black; font-size:20px;'><text y='50%'>💦</text></svg>") 16 -2, pointer; 
+    color: #fff;
+    text-decoration: underline;
+}
+::selection{
+    background: var(--color-main);
+    color: #fff;
+}
+a:hover{ 
+    color: var(--color-main) !important;
+}
+/* @@@로딩 가리기 -------------------*/
+body.no-scroll{
+    overflow: hidden !important;
+}
+body::-webkit-scrollbar /* 스크롤바 영역에 대한 설정 */{
+    width: 12px;
+}
+body::-webkit-scrollbar-thumb /*스크롤바 막대에 대한 설정*/{
+    background: var(--color-main);
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+body::-webkit-scrollbar-track /*스크롤바 뒷 배경에 대한 설정*/{
+    background-color: rgba(243,250,253,0.9);
+}
+h3{
+    font-size: 48px !important;
+    font-family: 'GillSansStd','Pretendard', sans-serif !important;
+    text-align: center;
+    line-height: 1.4em;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+.container_mg{
+    margin-bottom: 160px;
+}
+/* --- 커스텀 커서 --- */
+.cursor-custom{
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3px);
+    background: rgba(255, 255, 255, 0.05);
+    position: fixed;
+    border-radius: 50%;
+    aspect-ratio: 1;
+    z-index: 9;
+    width: 60px;
+    cursor: none;
+}
+/* --- 로딩 관련 스타일 --- */
+.loadingbg{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 1);
+    z-index: 9999;
+}
+.main_loader{
+    position: relative;
+    width: 140px;
+    height: 24px;
+    top: calc(50% - 10px);
+    left: calc(50% - 70px);
+    background-color: var(--color-main-100);
+    border-radius: 6px;
+}
+.main_loader:before{
+    content: "";
+    position: absolute;
+    background-color: var(--color-main);
+    border-radius: 6px;
+    top: 0px;
+    left: 0px;
+    height: 24px;
+    width: 0px;
+    opacity: 1;
+    animation: main_loader 3s ease-in-out 2;
+    -webkit-animation: main_loader 3s ease-in-out 2;
+}
+.main_loader:after{
+    content: "LOADING...";
+    font-family: 'GillSansStd','Pretendard', sans-serif;
+    color: var(--color-main);
+    font-weight: 700;
+    font-size: 16px;
+    position: absolute;
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    left: 0;
+    top: 2px;
+    letter-spacing: 0.1em;
+}
+@keyframes main_loader{
+    0%{width: 0px;}
+    65%{width: 100%; opacity: 1;}
+    85%{opacity: 0; width: 100%;}
+    100%{opacity: 0; width: 0px;}
+}
+@-webkit-keyframes main_loader{
+    0%{width: 0px;}
+    65%{width: 100%; opacity: 1;}
+    85%{opacity: 0; width: 100%;}
+    100%{opacity: 0; width: 0px;}
+}
+
+/* --- 인트로 --- */
+.__introtxt{
+    font-family: 'GillSansStd';
+    font-size: 100px;
+    font-weight: 700;
+    line-height: 1.1em;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0px 0px 4px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.intro-visual-section{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+#main-background-video{
+    object-fit: cover;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -2;
+    opacity: 0.2;
+    mix-blend-mode: screen;
+}
+.main-bg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    z-index: -3;
+}
+
+/* --- 이력 페이지 섹션 --- */
+.infomation_sec{
+    margin: 160px auto;
+    color: #fff;
+    position: relative;
+}
+.infomation_sec::before{
+    content: '';
+    position: absolute;
+    display: block;
+    top: -40px;
+    left: 0;
+    background-image: url(../../img/informationinformation.svg);
+    width: 100%;
+    height: 160px;
+    z-index: 1; 
+    background-repeat: repeat-x;
+}
+.info_t_txt{
+    position: relative;
+    font-size: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.main_t_c{
+    color: var(--color-main);
+    font-family: 'IncheonEducation';
+    font-weight: 600;
+}
+.sub_t_c{
+    color: var(--color-sub);
+    font-family: 'IncheonEducation';
+}
+
+/* 2. 배경 텍스트 (옅은 색상) */
+.text_fill_effect{
+    font-family: 'IncheonEducation';
+    white-space: nowrap;
+    line-height: 1.1em;
+    color: rgba(255, 255, 255, 0.15); /* 옅은 배경색 */
+    position: relative; /* 자식 요소의 기준점 */
+    /* display: inline-block; */ /* h1은 block 레벨이지만, inline-block도 필요하면 추가 */
+    overflow: hidden; /* 넘치는 요소 숨김 */
+    letter-spacing: -0.04em;
+}
+/* 3. ⭐ 핵심 수정: 채워지는 오버레이 텍스트 (.filled_content) 정의 ⭐ */
+/* GSAP가 이 요소의 width를 0에서 100으로 애니메이션함 */
+.filled_on{
+    position: absolute; /* 부모(.text_fill_effect) 위에 겹치도록 설정 */
+    top: 0;
+    left: 0;
+    z-index: 2;
+    font-family: 'IncheonEducation';
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap; /* 줄바꿈 방지 */
+    color: #FFFFFF; /* 채워질 때의 기본 색상 (main_t_c와 sub_t_c로 덮어씌워짐) */
+}
+
+/* 프로필 이미지 */
+.infomation_view{
+    display: flex;
+    align-items: flex-start;
+    margin-top: 60px;
+}
+.infomation_view .profile_image{
+    width: 45%;
+    display: flex;
+    justify-content: flex-end;
+}
+.infomation_view .profile_image img{
+    max-width: 400px;
+    border-radius: 24px;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+}
+.infomation_view .profile_image img::before{
+    display: block;
+    position: absolute;
+    z-index: 1;
+    max-width: 400px;
+    width: 100%;
+    left: 20px;
+    top: 20px;
+    background: #f0f0f0;
+}
+.profile_list_txt{
+    width: 55%;
+    padding-left: 5%;
+}
+.profile_list_txt a{
+    text-decoration: underline;    
+}
+.profile_list_txt ul > li{
+    font-weight: 300;
+}
+.profile_list_txt ul > li:nth-child(1){
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+.profile_list_txt ul > li:nth-child(5){
+    padding-left: 60px;
+}
+.profile_list_txt ul > li:nth-child(6){
+    font-size: 20px;
+    margin: 16px 0 4px;
+    font-weight: 600;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+.vh100{ height: 100%; min-height:100vh; }
+/* .port-wrap1 안의 .card-container에만 스타일 적용 */
+.port-wrap1 > .card-container{
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin);
+    max-width: 100%; 
+    margin: 0 auto 120px;
+}
+.row{
+    display: flex;
+    gap: var(--margin);
+}
+.card-container .box{
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-main-900);
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+/* --- 카드형 레이아웃 썸네일 --- */
+.card-container .thumbnail{ 
+    position: absolute;
+    inset: 0; 
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    height: 100%;
+    opacity: 0.7;
+    position: relative; 
+    overflow: hidden; 
+    transition: opacity 0.3s ease;
+}
+.card-container .thumbnail::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out; 
+    z-index: 1; 
+}
+.box:hover .thumbnail::before{ opacity: 1;}
+.card-container .info{
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    padding: 16px;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0px 2px 6px rgb(60 60 60 / 32%);
+}
+.text-block{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.text-block > .title{
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-ach-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-block > .desc{
+  font-size: 14px;
+  line-height: 1.4em;
+  font-weight: 300;
+  color: var(--color-ach-5);
+}
+.card-container .arrow{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0098DF, #7DD1D1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+.card-container .arrow::before{
+    content: '';
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../img/icons/arrow.svg);
+    left: 0;
+    top: 0;
+    transform: rotate(-45deg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* --- 모달윈도우 -----------------*/
+.img_glayLayer{
+    position: fixed;
+    width: 100vw; 
+    height: 100vh; 
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none; /* jQuery로 제어되지만, 초기 display: none 필요 */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000; /* overLayer보다 낮게 */
+}
+.overLayer{
+    position: fixed;
+    max-width: 480px;
+    z-index: 9999;/*여러개를 만들면 가장 위로 가게*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+.overLayer > img{
+    width: 100%; 
+}
+.overLayer .icon_close{
+    top: 0;
+    right: -56px;
+    width: 48px;
+    height: 48px;
+}
+.overLayer .material-icons{
+}
+/* --- PC 버전 스타일 (id="pc-version") --- */
+#pc-version{
+    display: flex; /* 기본적으로 PC 버전은 보임 */
+}
+#pc-version .box{
+    flex: 0 0 calc((100% - 2 * var(--margin)) / 3); 
+    height: var(--box-height-pc);
+    border-radius: 20px;
+    filter: grayscale(30%);
+}
+#pc-version .box.shrink{
+    flex: 0 0 calc((100% - 2 * var(--margin)) / 4);
+}
+#pc-version .box.expand{
+    flex: 0 0 calc((100% - 2 * var(--margin)) / 2);
+    background-color: var(--color-main-100); /* 확장 시 배경색 */
+    opacity: 1;
+    filter: grayscale(0%);
+}
+#pc-version .box:hover .thumbnail{
+    opacity: 1; /* 마우스 올리면 100% 불투명하게 */
+}
+#pc-version .box.expand .info{
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: #C9ECFD; /* 확장 시 정보 배경색 */
+}
+#pc-version .box.expand .arrow{
+    background: #fff;
+    color: var(--color-main); /* 확장 시 화살표 색상 */
+}
+#pc-version .box.expand .arrow::before{
+    background-image: url(../../img/icons/arrow_on.svg);
+}
+#pc-version .info{
+    border-radius: 16px;
+}
+
+/* --- 태블릿/모바일 버전 스타일 --- */
+#tablet-mobile-version{
+    display: none;
+}
+/* --- 미디어 쿼리 --- */
+/* 태블릿 해상도 (1200px 이하) */
+@media (max-width: 1380px) and (max-height: 1030px), /* A. 가로 모드 (1380x1030) */
+       (max-width: 1030px) and (max-height: 1380px){
+    .main_loader:after{
+        top: 3px;
+    }
+    .port-wrap1{
+        width: calc(100% - 32px);
+        padding: 0;
+    }
+    .__introtxt{
+        font-size: 72px;
+    }
+    .container_mg{
+       margin-bottom: 120px;
+    }
+    .infomation_sec{
+        margin: 120px auto;
+    }
+    #pc-version{
+    display: none; /* PC 버전 숨김 */
+        }
+    #tablet-mobile-version{
+        display: flex; /* 태블릿/모바일 버전 보임 */
+        flex-direction: column; /* 전체 컨테이너는 세로로 쌓음 (각 row는 가로) */
+    }
+    #tablet-mobile-version .row{ 
+        justify-content: space-between; /* 2개 정렬 위해 추가 */
+        flex-direction: row; /* row 안에서는 가로 정렬 유지 */
+    }
+    #tablet-mobile-version .box{
+        flex: 0 0 calc((100% - var(--margin)) / 2); /* 2개씩 나오도록 너비 조정 */
+        height: var(--box-height-tablet); /* 태블릿 높이 */
+        border-radius: 16px;
+    }
+    #tablet-mobile-version .info{
+        border-radius: 16px;
+    }
+    .card-container .thumbnail{
+        opacity: 1;
+    }
+}
+
+/* 모바일 해상도 (720px 이하) */
+@media (max-width: 720px){
+    body::-webkit-scrollbar /* 스크롤바 영역에 대한 설정 */{
+        width: 4px;
+    }
+    body::-webkit-scrollbar-thumb /*스크롤바 막대에 대한 설정*/{
+        background: var(--color-main);
+        border-radius: 4px;
+        background-clip: padding-box;
+        border: 0px solid transparent;
+    }
+    body::-webkit-scrollbar-track /*스크롤바 뒷 배경에 대한 설정*/{
+        background-color: rgba(243,250,253,0.9);
+    }
+    .main_loader:after{
+        top: 4px;
+    }
+    .__introtxt{
+        font-size: clamp(10vw, 36px, 48px);
+    }
+    .text-block > .title{
+      font-size: 18px;
+    }
+    .text-block > .desc{
+      font-size: 14px;
+    }
+    .info_t_txt{
+        font-size: clamp(10vw, 36px, 48px);
+    }
+    .container_mg{
+       margin-bottom: 80px;
+    }
+    /* 프로필 이미지 */
+    .infomation_sec{
+        margin: 80px auto;
+    }
+    .infomation_view{
+        display: block;
+        margin-top: 0px;
+    }
+    .infomation_view > li{
+        margin-top: 32px;
+    }
+    .infomation_view .profile_image{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .infomation_view .profile_image img{
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    .profile_list_txt{
+        width: 100%;
+        padding-left: 0%;
+    }
+    .profile_list_txt ul > li:nth-child(1){
+        text-align: center;
+    }
+
+    .profile_list_txt ul > li:nth-child(6){
+        margin: 16px 0 4px;
+    }
+    /* 모달윈도우 */
+    .overLayer .icon_close{
+        top: 0;
+        right: -32px;
+        width: 24px;
+        height: 24px;
+    }
+    #pc-version{
+        display: none; /* PC 버전 숨김 */
+    }
+    #tablet-mobile-version{
+        display: flex; /* 태블릿/모바일 버전 보임 */
+        flex-direction: column; /* 전체 컨테이너를 세로로 */
+    }
+    #tablet-mobile-version .row{ 
+        flex-direction: column; /* row 안의 박스들도 세로로 쌓음 (1열) */
+        gap: var(--margin); /* 박스 사이 간격 유지 */
+    }
+    #tablet-mobile-version .box{
+        flex: none; /* <--- 네 지적 반영: flex: none; */
+        width: 100%; /* <--- flex: none;일 때 너비를 명시 */
+        height: var(--box-height-mobile); /* 모바일 높이 */
+        border-radius: 8px;
+    }
+    #tablet-mobile-version .info{
+        border-radius: 8px;
+    }
+    .card-container .info{
+        padding: 12px;
+    }
+    .text-block{
+        gap: 4px;
+    }
+
+}

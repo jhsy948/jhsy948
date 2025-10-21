@@ -1,0 +1,109 @@
+/* 글로벌 CSS */
+:root {
+    --color-ach-1: #111111;
+    --color-ach-3: #282828;
+    --color-ach-5: #505050;
+    --color-ach-76: #767676;
+    --color-ach-9: #8F8F8F;
+    --color-black-400: #0098DF;
+    --color-black-600: #0098DF;
+    --color-black-700: #0098DF;
+    --color-black-800: #0098DF;
+    --color-black-900: #001E2D;
+    --color-main: #0098DF;
+    --color-main-100: #F3FAFD;
+    --color-main-200: #0098DF;
+    --color-main-300: #0098DF;
+    --color-main-400: #0098DF;
+    --color-main-600: #0098DF;
+    --color-main-700: #0098DF;
+    --color-main-800: #0098DF;
+    --color-main-900: #001E2D;
+    --color-sub: #7DD1D1;
+    --color-sub-100: #EDF9F9;
+    --color-sub-200: #0098DF;
+    --color-sub-300: #0098DF;
+    --color-sub-400: #0098DF;
+    --color-sub-600: #0098DF;
+    --color-sub-700: #0098DF;
+    --color-sub-800: #0098DF;
+    --color-sub-900: #001E2D;
+    --color-type-bg: #edece9;
+    --margin: 8px;
+    --box-height-pc: 460px;
+    --box-height-tablet: 320px;
+    --box-height-mobile: 280px;
+
+    --thumb-0: url('../../img/port_000.jpg');
+    --thumb-1: url('../../img/port_001.jpg');
+    --thumb-2: url('../../img/port_002.jpg');
+    --thumb-3: url('../../img/port_003.jpg');
+    --thumb-4: url('../../img/port_004.jpg');
+    --thumb-5: url('../../img/port_005.svg');
+    --thumb-6: url('../../img/port_006.jpg');
+    --thumb-7: url('../../img/port_007.jpg');
+    --thumb-8: url('../../img/port_008.jpg');
+    --thumb-9: url('../../img/port_009.jpg');
+    --thumb-10: url('../../img/port_010.jpg');
+    --thumb-11: url('../../img/port_011.jpg');
+    --thumb-12: url('../../img/port_012.jpg');
+    --thumb-13: url('../../img/port_013.jpg');
+    --thumb-14: url('../../img/port_014.jpg');
+    --thumb-15: url('../../img/port_015.jpg');
+
+    /*--thumb-0-on: url('../../img/port_000.jpg');*/
+    --thumb-1-on: url('../../img/port_001.svg');
+    --thumb-2-on: url('../../img/port_002.svg');
+    --thumb-3-on: url('../../img/port_003.svg');
+    /*--thumb-4: url('../../img/port_004.svg');
+    --thumb-5-on: url('../../img/port_005.svg');
+    --thumb-6-on: url('../../img/port_006.jpg');
+    --thumb-7-on: url('../../img/port_007.jpg');
+    --thumb-8-on: url('../../img/port_008.jpg');
+    --thumb-9-on: url('../../img/port_009.jpg');
+    --thumb-10-on: url('../../img/port_010.jpg');
+    --thumb-11-on: url('../../img/port_011.jpg');
+    --thumb-12-on: url('../../img/port_012.jpg');
+    --thumb-13-on: url('../../img/port_013.jpg');
+    --thumb-14-on: url('../../img/port_014.jpg');
+    --thumb-15-on: url('../../img/port_015.jpg');*/
+
+}
+/* --- img --- */
+.card-container .thumbnail.port-thumb-1 { background-image: var(--thumb-0); }
+.card-container .thumbnail.port-thumb-1 { background-image: var(--thumb-1); }
+.card-container .thumbnail.port-thumb-2 { background-image: var(--thumb-2); }
+.card-container .thumbnail.port-thumb-3 { background-image: var(--thumb-3); }
+.card-container .thumbnail.port-thumb-4 { background-image: var(--thumb-4); }
+.card-container .thumbnail.port-thumb-5 { background-image: var(--thumb-5); }
+.card-container .thumbnail.port-thumb-6 { background-image: var(--thumb-6); }
+.card-container .thumbnail.port-thumb-7 { background-image: var(--thumb-7); }
+.card-container .thumbnail.port-thumb-8 { background-image: var(--thumb-8); }
+.card-container .thumbnail.port-thumb-9 { background-image: var(--thumb-9); }
+.card-container .thumbnail.port-thumb-10 { background-image: var(--thumb-10); }
+.card-container .thumbnail.port-thumb-11 { background-image: var(--thumb-11); }
+.card-container .thumbnail.port-thumb-12 { background-image: var(--thumb-12); }
+.card-container .thumbnail.port-thumb-13 { background-image: var(--thumb-13); }
+.card-container .thumbnail.port-thumb-14 { background-image: var(--thumb-14); }
+.card-container .thumbnail.port-thumb-15 { background-image: var(--thumb-15); }
+
+/* 호버 */
+.card-container .thumbnail.port-thumb-1::before {background-image: var(--thumb-1-on);}
+.card-container .thumbnail.port-thumb-2::before {background-image: var(--thumb-2-on);}
+.card-container .thumbnail.port-thumb-3::before {background-image: var(--thumb-3-on);}
+.card-container .thumbnail.port-thumb-4::before {background-image: var(--thumb-4-on);}
+.card-container .thumbnail.port-thumb-5::before {background-image: var(--thumb-5-on);}
+.card-container .thumbnail.port-thumb-6::before {background-image: var(--thumb-6-on);}
+.card-container .thumbnail.port-thumb-7::before {background-image: var(--thumb-7-on);}
+.card-container .thumbnail.port-thumb-8::before {background-image: var(--thumb-8-on);}
+.card-container .thumbnail.port-thumb-9::before {background-image: var(--thumb-9-on);}
+.card-container .thumbnail.port-thumb-10::before {background-image: var(--thumb-10-on);}
+.card-container .thumbnail.port-thumb-11::before {background-image: var(--thumb-11-on);}
+.card-container .thumbnail.port-thumb-12::before {background-image: var(--thumb-12-on);}
+.card-container .thumbnail.port-thumb-13::before {background-image: var(--thumb-13-on);}
+.card-container .thumbnail.port-thumb-14::before {background-image: var(--thumb-14-on);}
+.card-container .thumbnail.port-thumb-15::before {background-image: var(--thumb-15-on);}
+
+/* --- icon ---- */
+.img_icon { display: inline-block; position: absolute; background-repeat: no-repeat; cursor: pointer; background-size: contain;  background-position: center; }
+.icon_close { background-image: url("../../img/icons/close.svg") }
